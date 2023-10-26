@@ -101,26 +101,26 @@ const Featurelist = [
         defaultimage: kj,
         checkedimage: ActiveKx,
         checked: false,
+        sort: 8,
       },
       {
         name: '属性查询',
         defaultimage: sx,
         checkedimage: ActiveSx,
         checked: false,
-        sort: 8,
+        sort: 9,
       },
       {
         name: '碰撞分析',
         defaultimage: pz,
         checkedimage: ActivePz,
         checked: false,
-        sort: 9,
+        sort: 10,
       },
     ],
   },
 ];
 
-// 排序 Featurelist 父级 子级别
 function sort(arr) {
   arr.sort((a, b) => a.sort - b.sort);
   arr.forEach((item) => {
@@ -130,6 +130,5 @@ function sort(arr) {
   });
   return arr;
 }
-
 sort(Featurelist);
 export default Featurelist;

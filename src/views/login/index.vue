@@ -120,7 +120,7 @@ const handleSubmit = (e: any) => {
   formRef.value.validate(async (errors: any) => {
     if (!errors) {
       const { userName, password } = formInline;
-      message.loading("登录中@.");
+      message.loading("登录中");
       loading.value = true;
 
       const params: FormState = {
@@ -226,16 +226,6 @@ const handleSubmit = (e: any) => {
   </div>
 </template>
 <style scoped lang="less">
-.password_input {
-  position: relative;
-  margin-top: 3vh;
-  .icon_eye {
-    position: absolute;
-    right: 10px;
-    top: 38%;
-    cursor: pointer;
-  }
-}
 .el-icon-view-close {
   position: relative;
   &::after {
@@ -280,10 +270,10 @@ button {
   );
   border: 1px solid transparent;
   color: #fff;
-  height: 4.5vh;
+  height: 45px;
   cursor: pointer;
-  font-size: 2vh;
-  margin-top: 2.5vh;
+  font-size: 15px;
+  margin-top: 30px;
   border-radius: 4px;
 }
 .login {
@@ -324,15 +314,14 @@ input:-ms-input-placeholder {
 .loginto .titlename {
   color: #fff;
   font-weight: normal;
-  font-size: 1.1vw;
-  height: 5vh;
-  line-height: 4.6vh;
+  font-size: 15px;
+  height: 23px;
   text-align: center;
   background: url("@/assets/images/login/bg2.png") no-repeat center center;
-  background-size: 8vw 1.5vh;
+  background-size: 50%;
   position: relative;
-  top: 2vh;
-  margin-bottom: 5vh;
+  top: 15px;
+  margin-bottom: 55px;
 }
 h1 {
   display: inline-block;
@@ -369,7 +358,7 @@ h1 {
 
 .namebox {
   width: 100%;
-  height: 5vh;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;

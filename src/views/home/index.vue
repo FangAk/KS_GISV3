@@ -1,8 +1,8 @@
 <script setup>
-import { ref, reactive, getCurrentInstance } from "vue";
+import { ref, reactive, getCurrentInstance, onMounted } from "vue";
 import Featurelist from "@/config";
-
-
+import { GISIMGMAPADRESS } from "@/config/mapservers.js";
+import { setUpGisMap } from "@/plugins";
 const FeatureRef = ref();
 const list = [
   {
@@ -18,6 +18,9 @@ const list = [
     checked: false,
   },
 ];
+const gisMapRef = ref();
+let gisMap = {}; //地图实例
+let mapPackage = {}; //地图导出的包
 const {
   proxy: { $Data },
 } = getCurrentInstance();
@@ -26,7 +29,6 @@ const Time = ref("");
 setInterval(() => {
   Time.value = getTime();
 }, 1000);
-
 //详细信息
 const detail = (v, index, i) => {
   Featurelist.forEach((item) => {
@@ -48,10 +50,22 @@ const changeType = (v) => {
     v.checked = true;
   }
 };
+
+//初始化gis
+const initGis = () => {
+  setUpGisMap(gisMapRef.value, ({ map, packageObj }) => {
+    mapPackage = packageObj;
+    gisMap = map;
+    console.log(gisMap, mapPackage);
+  });
+};
+onMounted(() => {
+  initGis();
+});
 </script>
 
 <template>
-  <div id="Map">
+  <div ref="gisMapRef" id="Map">
     <div class="Feature">
       <div class="F_l">{{ Time }}</div>
       <div class="F_r">
@@ -143,7 +157,10 @@ const changeType = (v) => {
     color: #fff;
     border: 1px solid #00ffcc;
     transition: all 0.5s;
-    overflow: hidden;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     div {
       width: 100%;
     }
@@ -157,8 +174,8 @@ const changeType = (v) => {
       flex-wrap: wrap;
       align-items: center;
       & > div {
-        margin: 8px;
-        width: 20%;
+        margin: 5px 0;
+        width: 25%;
         display: flex;
         align-items: center;
         flex-direction: column;
